@@ -106,6 +106,9 @@ section {
 div.portfolio-col-left * , div.portfolio-col-rigth * {
 	text-align: left;
 }
+.portfolio-col-left, .portfolio-col-rigth {
+	margin-bottom: 40px;
+}
 .portfolio-col-left h2, .portfolio-col-rigth h2 {
 	text-align: left;
 	margin-top: 16px;
