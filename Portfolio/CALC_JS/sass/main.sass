@@ -1,0 +1,171 @@
+$active: #FF9200
+
+@mixin before
+	&:before
+		content: ''
+		position: absolute
+		width: 100%
+		height: 1px
+		background-color: $active
+		left: 0
+		bottom: 0
+
+*
+	box-sizing: border-box
+	outline: none
+
+body
+	height: 100vh
+	background: url(../img/bg-6.png) center no-repeat
+	position: relative
+	background-size: cover
+	font-family: 'Open Sans', sans-serif
+	padding: 0
+	margin: 0
+
+.calc
+	width: 1072px
+	height: 650px
+	border: 2px solid $active
+	margin: 50px auto
+	display: flex
+	flex-direction: column
+	align-items: center
+	justify-content: top
+	border-radius: 15px
+
+	.tabs
+		width: 100%
+		padding-top: 30px
+		padding-bottom: 35px
+		display: -webkit-flex
+		display: -moz-flex
+		display: -ms-flex
+		display: -o-flex
+		display: flex
+		justify-content: center
+		
+		.tab-left, .tab-right
+			width: 200px
+			height: 70px
+			border-radius: 15px 0 0 0
+			background-image: linear-gradient(to top, rgba(0, 0, 0, 0.77) 0%, #323131 100%)
+			margin-right: 5px
+			color: #cecece
+			font-size: 18px
+			font-weight: 700
+			text-align: center
+			line-height: 70px
+			cursor: pointer
+		.tab-right
+			border-radius: 0 15px 0 0
+		.active
+			background: $active
+			color: #000
+			position: relative
+			&:before
+				content: ''
+				position: absolute
+				width: 199px
+				height: 1px
+				background-color: $active
+				left: 0
+				bottom: -8px
+
+.counter
+	width: 132px
+	height: 60px
+	border: 3px solid rgba(239, 174, 2, .8)
+	border-radius: 5px
+	background-color: transparent
+	text-align: center
+	color: $active
+	font-size: 48px
+	font-weight: 700
+
+.blocks
+	width: 65%
+	margin-bottom: 30px
+	display: -webkit-flex
+	display: -moz-flex
+	display: -ms-flex
+	display: -o-flex
+	display: flex
+	justify-content: space-between
+	align-items: center
+	&-title
+		position: relative
+		color: #fff
+		font-size: 30px
+		font-weight: 700
+		@include before
+#pages-block
+	display: none		
+
+.addiction
+	font-size: 30px
+	font-weight: 700
+	color: $active
+	&-title
+		margin-bottom: 20px
+		text-align: center
+	&-block
+		text-align: left
+		margin-bottom: 10px
+
+		input[type="checkbox"]
+			display: none
+			& + label
+				
+				display: block
+				position: relative
+				cursor: pointer
+				color: $active
+				padding-left: 55px
+				user-select: none
+				&:before
+					content: ''
+					display: block
+					width: 30px
+					height: 30px
+					border: 3px solid $active
+					position: absolute
+					left: 0
+					top: 3px
+					border-radius: 5px
+			&:checked
+				& + label
+					&:before
+						content: '✔'
+						font-size: 50px
+						text-align: center
+						text-shadow: 1px 1px 1px rgba(0, 0, 0, .2)
+						line-height: 20px
+						color: #FFAD40
+						display: block	
+						position: absolute   
+						top: 3px
+						left: 0
+						border-radius: 5px
+
+
+.total
+	width: 60%
+	display: flex
+	justify-content: space-between
+	align-items: center
+	margin-top: 40px
+	margin-bottom: 30px
+	color: #fff
+	font-size: 36px
+	font-weight: 700
+	&-count
+		width: 200px
+		height: 60px
+		background-color: transparent
+		border: none
+		color: $active
+		text-align: right
+		font-size: 56px
+		font-weight: 700
+

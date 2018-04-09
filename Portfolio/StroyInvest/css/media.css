@@ -1,0 +1,22 @@
+@charset "UTF-8";
+/*Адаптив для сайта*/
+@media (max-width: 480px) {
+  .top-nav {
+    position: relative; }
+    .top-nav_btn {
+      display: block;
+      position: absolute; }
+    .top-nav_menu {
+      -webkit-box-orient: vertical;
+      -webkit-box-direction: normal;
+      -webkit-flex-direction: column;
+          -ms-flex-direction: column;
+              flex-direction: column;
+      display: none; }
+      .top-nav_menu li {
+        line-height: 2; }
+      .top-nav_menu__active {
+        display: -webkit-box;
+        display: -webkit-flex;
+        display: -ms-flexbox;
+        display: flex; } }

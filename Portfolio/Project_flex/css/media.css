@@ -1,0 +1,71 @@
+@media (max-width: 1199px) {
+	html {
+		font-size: 9px;
+
+	}
+}
+
+@media (max-width: 991px) {
+	html {
+		font-size: 8px;
+			}
+.visible-lg {
+		display: none;
+	}
+
+	.logo img, .footer-logo img {
+		width: 4rem;
+
+	}
+
+	.logo:after {
+		font-size: 2rem;
+
+	}
+.m-menu-link {
+	display: block;
+}
+.get-started-btn {
+	margin: 0;
+}
+
+.table {
+
+}
+.price {
+
+			flex-direction: column;
+}
+.price-tag img{
+	width: 6rem;
+}
+
+.footer {
+	min-height: 10rem;
+}
+
+.footer-menu {
+	display: none;
+}
+.footer-main {
+	justify-content: center;
+	margin: 1rem;
+
+}
+
+.footer-logo {
+	margin: 1rem;
+}
+
+.footer-contacts {
+	-webkit-flex-direction: column;
+	-moz-flex-direction: column;
+	-ms-flex-direction: column;
+	-o-flex-direction: column;
+	flex-direction: column;
+}
+
+.icons {
+	font-size: 3rem;
+}
+}
