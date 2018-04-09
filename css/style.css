@@ -162,6 +162,9 @@ footer {
 	text-align: center;
 	position: relative;
 }
+.footer-cta {
+	margin-bottom: 20px;
+}
 .footer-btn {
 	color: #deedfe;
 	font-size: 18px;
@@ -170,7 +173,7 @@ footer {
 	line-height: 39.8px;
 	border-radius: 24px;
 	border: 1px solid #ffffff;
-	padding: 2px 30px;
+	padding: 10px 30px;
 	margin-top: 20px;
 	cursor: pointer;
 }
