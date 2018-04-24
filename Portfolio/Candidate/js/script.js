@@ -93,6 +93,7 @@ readyBtn.addEventListener('click', function() {
 
 			card_new.querySelector('.name').textContent = name.value;
 
+			
 			card_new.querySelector('.age').textContent = age.value;
 			card_new.querySelector('.bio').textContent = bio.value;
 			card_new.querySelector('.views').textContent = views.value;
