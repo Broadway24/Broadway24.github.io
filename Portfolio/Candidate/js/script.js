@@ -32,7 +32,7 @@ popupBtn.addEventListener('click', function() {
 	let card_2 = card_1.cloneNode(true);
 	card_1.parentNode.insertBefore(card_2, card_1.nextSibling);
 
-	main_cards_item[1].querySelector('.photo-1').style.backgroundImage = "url(../Candidate/img/construct-5.png)";
+	main_cards_item[1].querySelector('.photo-1').style.backgroundImage = "url(../img/construct-5.png)";
 
 	reset();
 });
@@ -74,7 +74,7 @@ readyBtn.addEventListener('click', function() {
 		&& 	!isNaN(parseFloat(ageValue)) && ageValue >= 18
 		&&  (typeof(bioValue)) === 'string'  && bioValue.length < 100 && bioValue != ''
 		// && 	views.value != ''
-		// views.selectedIndex > 0
+		// 
 		) {
 			overlay.style.display = "none";
 			main.style.display = "none";
@@ -84,9 +84,13 @@ readyBtn.addEventListener('click', function() {
 			let card_new = doc.getElementsByClassName('main-cards-item')[1];
 			document.getElementsByClassName('main-cards-item')[1].querySelector('.photo-1').style.backgroundSize = 'contain';
 
+			if (views.selectedIndex == 0) {
+				card_new.querySelector('.views').textContent = views[1].value;
+			} else {
+				card_new.querySelector('.views').textContent = views.value;
+			}
 
-
-			card_new.querySelector('.views').textContent = views.value;
+			
 
 			card_new.querySelector('.name').textContent = name.value;
 			
@@ -133,8 +137,8 @@ function reset(){
 	bio.value = '';
 	views.value = '';
 	sex[0].checked = true;
-	personEasy.style.backgroundImage = "url(../Candidate/img/construct-5.png)";
-    preview.style.backgroundImage = "url(../Candidate/img/construct-5.png)";
+	personEasy.style.backgroundImage = "url(../img/construct-5.png)";
+    preview.style.backgroundImage = "url(../img/construct-5.png)";
 };
 
 // Кнопка "Сбросить результаты"
@@ -164,15 +168,12 @@ votingBtn.addEventListener('click', function() {
    		max = arr[0],
    		id = 0;
    		
-		result_count[0].textContent = n1 + '%';
-		result_count[1].textContent = n2 + '%';
-		result_count[2].textContent = n3 + '%';
-		progress_bar[0].style.height = n1 + '%';
-		progress_bar[1].style.height = n2 + '%';
-		progress_bar[2].style.height = n3 + '%';
-/*
 		for (i = 0; i < arr.length; ++i) {
-
+		    result_count[i].textContent = arr[i] + '%';
+			progress_bar[i].style.height = arr[i] + '%';			
+		}
+/*
+		
 		    if (arr[i] > max) {
 		    	max = arr[i];
 		    	id = i;
@@ -192,32 +193,52 @@ votingBtn.addEventListener('click', function() {
 
 crimeBtn.addEventListener('click', function() {
 
-});
+	let n1 = Math.ceil(Math.random()*99) - 12,
+   		n2 = Math.ceil(Math.random()*(100-n1)) + 25,
+   		n3 = 100 - n1 - n2 - 13,
+   		arr = [n1, n2, n3],
+   		max = arr[0],
+   		id = 0;
+/*
+   		 if (arr[0] < 0) {
+   		 	arr[2] += Math.abs(arr[0]);
+
+   		 } else if (arr[2] < 0) {
+   		 	arr[0] += Math.abs(arr[2]);
+   		 }
+   		*/
+   		for (i = 0; i < arr.length; ++i) {
+		    result_count[i].textContent = arr[i] + '%';
+			progress_bar[i].style.height = arr[i] + '%';			
+		}
+
+	});
+
 
 
 function checkSex() {
 	let n = 1;
 	for (let i = 0; i < sex.length; i++) {
 		if (sex[0].checked) {
-			personEasy.style.backgroundImage = "url(../Candidate/img/construct-5.png)";
-        	preview.style.backgroundImage = "url(../Candidate/img/construct-5.png)";
+			personEasy.style.backgroundImage = "url(../img/construct-5.png)";
+        	preview.style.backgroundImage = "url(../img/construct-5.png)";
 		 	maleStyle ();
 		 	sex[i].addEventListener('change', function () {
 			
 				if (sex[0].checked) {
 					n = n + 4;
 					maleStyle ();
-					personEasy.style.backgroundImage = "url(../Candidate/img/construct-"+n+".png)";
-		        	preview.style.backgroundImage = "url(../Candidate/img/construct-"+n+".png)";
+					personEasy.style.backgroundImage = "url(../img/construct-"+n+".png)";
+		        	preview.style.backgroundImage = "url(../img/construct-"+n+".png)";
 		        	document.getElementsByClassName('main-cards-item')[1].querySelector('.sex').textContent = sex[0].value;
-		        	document.getElementsByClassName('main-cards-item')[1].querySelector('.photo-1').style.backgroundImage = "url(../Candidate/img/construct-"+n+".png)";
+		        	document.getElementsByClassName('main-cards-item')[1].querySelector('.photo-1').style.backgroundImage = "url(../img/construct-"+n+".png)";
 				} else {
 					n = 1;
 					femaleStyle ();
-					personEasy.style.backgroundImage = "url(../Candidate/img/construct-"+n+".png)";
-		        	preview.style.backgroundImage = "url(../Candidate/img/construct-"+n+".png)";
+					personEasy.style.backgroundImage = "url(../img/construct-"+n+".png)";
+		        	preview.style.backgroundImage = "url(../img/construct-"+n+".png)";
 		        	document.getElementsByClassName('main-cards-item')[1].querySelector('.sex').textContent = sex[1].value;
-		        	document.getElementsByClassName('main-cards-item')[1].querySelector('.photo-1').style.backgroundImage = "url(../Candidate/img/construct-"+n+".png)";
+		        	document.getElementsByClassName('main-cards-item')[1].querySelector('.photo-1').style.backgroundImage = "url(../img/construct-"+n+".png)";
 				}
 			});	
 		};
@@ -234,17 +255,17 @@ function femaleStyle () {
 	next.addEventListener('click', function() {
 			femaleNum++;
 			if (femaleNum > femaleMaxNum) { femaleNum = 1; }
-			personEasy.style.backgroundImage = "url(../Candidate/img/construct-"+femaleNum+".png)";
-			preview.style.backgroundImage = "url(../Candidate/img/construct-"+femaleNum+".png)";
-			document.getElementsByClassName('main-cards-item')[1].querySelector('.photo-1').style.backgroundImage = "url(../Candidate/img/construct-"+femaleNum+".png)";
+			personEasy.style.backgroundImage = "url(../img/construct-"+femaleNum+".png)";
+			preview.style.backgroundImage = "url(../img/construct-"+femaleNum+".png)";
+			document.getElementsByClassName('main-cards-item')[1].querySelector('.photo-1').style.backgroundImage = "url(../img/construct-"+femaleNum+".png)";
 	});
 
 	prev.addEventListener('click', function() {
 			femaleNum--;
 			if (femaleNum < 1) { femaleNum = femaleMaxNum; }
-			personEasy.style.backgroundImage = "url(../Candidate/img/construct-"+femaleNum+".png)";
-			preview.style.backgroundImage = "url(../Candidate/img/construct-"+femaleNum+".png)";
-			document.getElementsByClassName('main-cards-item')[1].querySelector('.photo-1').style.backgroundImage = "url(../Candidate/img/construct-"+femaleNum+".png)";
+			personEasy.style.backgroundImage = "url(../img/construct-"+femaleNum+".png)";
+			preview.style.backgroundImage = "url(../img/construct-"+femaleNum+".png)";
+			document.getElementsByClassName('main-cards-item')[1].querySelector('.photo-1').style.backgroundImage = "url(../img/construct-"+femaleNum+".png)";
 
 	});	
 };
@@ -257,18 +278,18 @@ function maleStyle () {
 	next.addEventListener('click', function() {
 			maleNum++;
 			if (maleNum > maleMaxNum) { maleNum = 5; }
-			personEasy.style.backgroundImage = "url(../Candidate/img/construct-"+maleNum+".png)";
-			preview.style.backgroundImage = "url(../Candidate/img/construct-"+maleNum+".png)";
-			document.getElementsByClassName('main-cards-item')[1].querySelector('.photo-1').style.backgroundImage = "url(../Candidate/img/construct-"+maleNum+".png)";
+			personEasy.style.backgroundImage = "url(../img/construct-"+maleNum+".png)";
+			preview.style.backgroundImage = "url(../img/construct-"+maleNum+".png)";
+			document.getElementsByClassName('main-cards-item')[1].querySelector('.photo-1').style.backgroundImage = "url(../img/construct-"+maleNum+".png)";
 
 	});
 
 	prev.addEventListener('click', function() {
 			maleNum--;
 			if (maleNum < 5) { maleNum = maleMaxNum; }
-			personEasy.style.backgroundImage = "url(../Candidate/img/construct-"+maleNum+".png)";
-			preview.style.backgroundImage = "url(../Candidate/img/construct-"+maleNum+".png)";
-			document.getElementsByClassName('main-cards-item')[1].querySelector('.photo-1').style.backgroundImage = "url(../Candidate/img/construct-"+maleNum+".png)";
+			personEasy.style.backgroundImage = "url(../img/construct-"+maleNum+".png)";
+			preview.style.backgroundImage = "url(../img/construct-"+maleNum+".png)";
+			document.getElementsByClassName('main-cards-item')[1].querySelector('.photo-1').style.backgroundImage = "url(../img/construct-"+maleNum+".png)";
 
 	});	
 	
