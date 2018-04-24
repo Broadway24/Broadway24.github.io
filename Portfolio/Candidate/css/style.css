@@ -1,28 +1,28 @@
 @font-face {
   font-family: 'Montserrat';
-  src: url("../fonts/Montserrat-Regular.woff2") format("woff2"), url("../fonts/Montserrat-Regular.woff") format("woff");
+  src: url("../Candidate/fonts/Montserrat-Regular.woff2") format("woff2"), url("../Candidate/fonts/Montserrat-Regular.woff") format("woff");
   font-weight: normal;
   font-style: normal;
 }
 
 @font-face {
   font-family: 'Montserrat';
-  src: url("../fonts/Montserrat-Bold.woff2") format("woff2"), url("../fonts/Montserrat-Bold.woff") format("woff");
+  src: url("../Candidate/fonts/Montserrat-Bold.woff2") format("woff2"), url("../Candidate/fonts/Montserrat-Bold.woff") format("woff");
   font-weight: bold;
   font-style: normal;
 }
 
 @font-face {
   font-family: 'Montserrat';
-  src: url("../fonts/Montserrat-Medium.woff2") format("woff2"), url("../fonts/Montserrat-Medium.woff") format("woff");
+  src: url("../Candidate/fonts/Montserrat-Medium.woff2") format("woff2"), url("../Candidate/fonts/Montserrat-Medium.woff") format("woff");
   font-weight: 500;
   font-style: normal;
 }
 
 @font-face {
   font-family: "Flaticon";
-  src: url("../fonts/Flaticon.eot");
-  src: url("../fonts/Flaticon.eot?#iefix") format("embedded-opentype"), url("../fonts/Flaticon.woff") format("woff"), url("../fonts/Flaticon.ttf") format("truetype"), url("../fonts/Flaticon.svg#Flaticon") format("svg");
+  src: url("../Candidate/fonts/Flaticon.eot");
+  src: url("../Candidate/fonts/Flaticon.eot?#iefix") format("embedded-opentype"), url("../Candidate/fonts/Flaticon.woff") format("woff"), url("../Candidate/fonts/Flaticon.ttf") format("truetype"), url("../fonts/Flaticon.svg#Flaticon") format("svg");
   font-weight: normal;
   font-style: normal;
 }
@@ -30,7 +30,7 @@
 @media screen and (-webkit-min-device-pixel-ratio: 0) {
 @font-face {
     font-family: "Flaticon";
-    src: url("../fonts/Flaticon.svg#Flaticon") format("svg");
+    src: url("../Candidate/fonts/Flaticon.svg#Flaticon") format("svg");
 }
 }
 
@@ -142,7 +142,7 @@
   transform: translate(-50%);
   width: 90px;
   height: 195px;
-  background: url("../img/clothes/construct/shoes.png") center no-repeat;
+  background: url("../Candidate/img/clothes/construct/shoes.png") center no-repeat;
   background-size: cover;
 }
 
@@ -154,12 +154,12 @@
 }
 
 .main-cards-item .candidate-block .photo-1 {
-  background: url("../img/candidate-1.png") center no-repeat;
+  background: url("../Candidate/img/candidate-1.png") center no-repeat;
 
 }
 
 .main-cards-item .candidate-block .photo-2 {
-  background: url("../img/candidate-2.png") center no-repeat;
+  background: url("../Candidate/img/candidate-2.png") center no-repeat;
 }
 
 .main-cards-item .candidate-block .result {
@@ -434,7 +434,7 @@
   width: 230px;
   height: 500px;
   margin: 0 auto;
-  background: url("../img/construct-1.png") center no-repeat;
+  background: url("../Candidate/img/construct-1.png") center no-repeat;
   background-size: 70%;
 }
 
@@ -451,7 +451,7 @@
   transform: translate(-50%);
   width: 180px;
   height: 450px;
-  background: url("../img/skin/skin-1.png") center no-repeat;
+  background: url("../Candidate/img/skin/skin-1.png") center no-repeat;
   background-size: cover;
 }
 
@@ -462,7 +462,7 @@
   transform: translate(-50%);
   width: 180px;
   height: 450px;
-  background: url("../img/clothes/construct/clothes-1.png") center no-repeat;
+  background: url("../Candidate/img/clothes/construct/clothes-1.png") center no-repeat;
   background-size: cover;
 }
 
@@ -473,7 +473,7 @@
   transform: translate(-50%);
   width: 180px;
   height: 450px;
-  background: url("../img/hair/construct/hair-1.png") center no-repeat;
+  background: url("../Candidate/img/hair/construct/hair-1.png") center no-repeat;
   background-size: cover;
 }
 
@@ -484,7 +484,7 @@
   transform: translate(-50%);
   width: 180px;
   height: 450px;
-  background: url("../img/clothes/construct/shoes.png") center no-repeat;
+  background: url("../Candidate/img/clothes/construct/shoes.png") center no-repeat;
   background-size: cover;
 }
 
@@ -586,7 +586,7 @@
 .custom-style .hair-style-1 {
   width: 160px;
   height: 80px;
-  background: #f2f2f2 url("../img/hair/slide/hair-1.png") center no-repeat;
+  background: #f2f2f2 url("../Candidate/img/hair/slide/hair-1.png") center no-repeat;
   background-size: 40%;
   border-radius: 10px;
 }
@@ -595,7 +595,7 @@
   display: none;
   width: 160px;
   height: 80px;
-  background: #f2f2f2 url("../img/hair/slide/hair-2.png") center no-repeat;
+  background: #f2f2f2 url("../Candidate/img/hair/slide/hair-2.png") center no-repeat;
   background-size: 40%;
   border-radius: 10px;
 }
@@ -604,7 +604,7 @@
   display: none;
   width: 160px;
   height: 80px;
-  background: #f2f2f2 url("../img/hair/slide/hair-3.png") center no-repeat;
+  background: #f2f2f2 url("../Candidate/img/hair/slide/hair-3.png") center no-repeat;
   background-size: 40%;
   border-radius: 10px;
 }
@@ -613,7 +613,7 @@
   display: none;
   width: 160px;
   height: 80px;
-  background: #f2f2f2 url("../img/hair/slide/hair-4.png") center no-repeat;
+  background: #f2f2f2 url("../Candidate/img/hair/slide/hair-4.png") center no-repeat;
   background-size: 40%;
   border-radius: 10px;
 }
@@ -622,7 +622,7 @@
   display: none;
   width: 160px;
   height: 80px;
-  background: #f2f2f2 url("../img/hair/slide/hair-5.png") center no-repeat;
+  background: #f2f2f2 url("../Candidate/img/hair/slide/hair-5.png") center no-repeat;
   background-size: 40%;
   border-radius: 10px;
 }
@@ -631,7 +631,7 @@
   display: none;
   width: 160px;
   height: 80px;
-  background: #f2f2f2 url("../img/hair/slide/hair-6.png") center no-repeat;
+  background: #f2f2f2 url("../Candidate/img/hair/slide/hair-6.png") center no-repeat;
   background-size: 40%;
   border-radius: 10px;
 }
@@ -639,7 +639,7 @@
 .custom-style .clothes-style-1 {
   width: 160px;
   height: 80px;
-  background: #aeaeae url("../img/clothes/slide/clothes-1.png") center no-repeat;
+  background: #aeaeae url("../Candidate/img/clothes/slide/clothes-1.png") center no-repeat;
   background-size: 20%;
   border-radius: 10px;
 }
@@ -648,7 +648,7 @@
   display: none;
   width: 160px;
   height: 80px;
-  background: #aeaeae url("../img/clothes/slide/clothes-2.png") center no-repeat;
+  background: #aeaeae url("../Candidate/img/clothes/slide/clothes-2.png") center no-repeat;
   background-size: 20%;
   border-radius: 10px;
 }
@@ -657,7 +657,7 @@
   display: none;
   width: 160px;
   height: 80px;
-  background: #aeaeae url("../img/clothes/slide/clothes-3.png") center no-repeat;
+  background: #aeaeae url("../Candidate/img/clothes/slide/clothes-3.png") center no-repeat;
   background-size: 20%;
   border-radius: 10px;
 }
@@ -666,7 +666,7 @@
   display: none;
   width: 160px;
   height: 80px;
-  background: #aeaeae url("../img/clothes/slide/clothes-4.png") center no-repeat;
+  background: #aeaeae url("../Candidate/img/clothes/slide/clothes-4.png") center no-repeat;
   background-size: 20%;
   border-radius: 10px;
 }
@@ -675,7 +675,7 @@
   display: none;
   width: 160px;
   height: 80px;
-  background: #aeaeae url("../img/clothes/slide/clothes-5.png") center no-repeat;
+  background: #aeaeae url("../Candidate/img/clothes/slide/clothes-5.png") center no-repeat;
   background-size: 20%;
   border-radius: 10px;
 }
@@ -684,7 +684,7 @@
   display: none;
   width: 160px;
   height: 80px;
-  background: #aeaeae url("../img/clothes/slide/clothes-6.png") center no-repeat;
+  background: #aeaeae url("../Candidate/img/clothes/slide/clothes-6.png") center no-repeat;
   background-size: 20%;
   border-radius: 10px;
 }
@@ -697,6 +697,6 @@
   width: 180px;
   height: 320px;
   border-radius: 8px;
-  background: #f2f2f2 url("../img/construct-1.png") center no-repeat;
+  background: #f2f2f2 url("../Candidate/img/construct-1.png") center no-repeat;
   background-size: 60%;
 }
