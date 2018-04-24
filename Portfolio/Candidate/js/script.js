@@ -26,17 +26,13 @@ popupBtn.addEventListener('click', function() {
 
 	for (let i = 0; i < customBlocks.length; i++) {
 	    customBlocks[i].style.display = "block";
+	    // document.getElementsByClassName('main-cards-item')[i].classList.remove("main-cards-item-active");
 	}
 
 	let card_2 = card_1.cloneNode(true);
 	card_1.parentNode.insertBefore(card_2, card_1.nextSibling);
 
-	document.getElementsByClassName('main-cards-item')[1].classList.remove("main-cards-item-active");
-	document.getElementsByClassName('main-cards-item')[0].classList.remove("main-cards-item-active");
-
-	document.getElementsByClassName('main-cards-item')[1].querySelector('.photo-1').style.backgroundImage = "url(../Candidate/img/construct-5.png)";
-
-
+	main_cards_item[1].querySelector('.photo-1').style.backgroundImage = "url(../img/construct-5.png)";
 
 	reset();
 });
@@ -59,7 +55,7 @@ let name = 			doc.getElementById('name'),
 	bio.placeholder = 'Заполните биографию кандидата';
 
 let views1 = document.createElement('option');
-    select.insertBefore(views1, select.firstChild);
+    views.insertBefore(views1, views.firstChild);
     views1.value = '';
     views1.innerHTML = 'Политические взгляды';
     views1.selected = true;
@@ -67,21 +63,18 @@ let views1 = document.createElement('option');
 
 checkSex();  // выбор внешнего вида и пола
 
-
-
-
 readyBtn.addEventListener('click', function() {
 
 	let nameValue = name.value,
 		ageValue = age.value,
 		bioValue = bio.value;
 
-
 	if (
 		(typeof(nameValue)) === 'string' && nameValue.length < 40 && nameValue != '' && /^[а-яА-ЯёЁ. ]+$/.test(nameValue) == true
-		&&
-		 !isNaN(parseFloat(ageValue)) && ageValue >= 18
-		&& (typeof(bioValue)) === 'string'  && bioValue.length < 100 && bioValue != ''
+		&& 	!isNaN(parseFloat(ageValue)) && ageValue >= 18
+		&&  (typeof(bioValue)) === 'string'  && bioValue.length < 100 && bioValue != ''
+		// && 	views.value != ''
+		// views.selectedIndex > 0
 		) {
 			overlay.style.display = "none";
 			main.style.display = "none";
@@ -91,14 +84,24 @@ readyBtn.addEventListener('click', function() {
 			let card_new = doc.getElementsByClassName('main-cards-item')[1];
 			document.getElementsByClassName('main-cards-item')[1].querySelector('.photo-1').style.backgroundSize = 'contain';
 
-			card_new.querySelector('.name').textContent = name.value;
 
-			
-			card_new.querySelector('.age').textContent = age.value;
-			card_new.querySelector('.bio').textContent = bio.value;
+
 			card_new.querySelector('.views').textContent = views.value;
 
+			card_new.querySelector('.name').textContent = name.value;
+			
+			if (ageValue % 10 == 1) {
+				card_new.querySelector('.age').textContent = age.value + ' год';
+			}  else if (ageValue % 10 > 1 && ageValue % 10 < 5) {
+				card_new.querySelector('.age').textContent = age.value + ' года';
+			} else {
+				card_new.querySelector('.age').textContent = age.value + ' лет';
+			}
+			
+			card_new.querySelector('.bio').textContent = bio.value;
+
 			reset();
+
 	} else if (nameValue.length > 40 || nameValue == '' || /^[а-яА-ЯёЁ. ]+$/.test(name) == false) {
 			alert('Некорректное значение имени\n\nВедите ФИО по кирилицей');
 			name.value = '';
@@ -109,8 +112,10 @@ readyBtn.addEventListener('click', function() {
 
 	} else if ((typeof(bioValue)) !== 'string' || bioValue.length > 100 || bioValue == '') {
 		alert('Заполниет биографию');
-	}
 
+	} else if  (views.selectedIndex = 0) {
+		alert('Выберите политические взгляды');
+		}
 
 });
 
@@ -121,12 +126,15 @@ function reset(){
 	for (let i = 0; i < main_cards_item.length; i++) {
 	    result_count[i].textContent = '0%';
 	    progress_bar[i].style.height = '0%';
-	    document.getElementsByClassName('main-cards-item')[i].classList.remove("main-cards-item-active");
+	    main_cards_item[i].classList.remove("main-cards-item-active");
 	}
 	name.value = '';
 	age.value = '';
 	bio.value = '';
 	views.value = '';
+	sex[0].checked = true;
+	personEasy.style.backgroundImage = "url(../img/construct-5.png)";
+    preview.style.backgroundImage = "url(../img/construct-5.png)";
 };
 
 // Кнопка "Сбросить результаты"
@@ -149,61 +157,36 @@ resetBtn.addEventListener('click', function() {
 		
 votingBtn.addEventListener('click', function() {
 
-	// document.getElementsByClassName('main-cards-item')[0].classList.remove("main-cards-item-active");	
-
-	let arr = [];
-	let summ = 0;
-	for(let i = 0; i < main_cards_item.length; i++) {
-
-		arr[i] = Math.floor(Math.random()*100);
-        summ += arr[i];
-
-		result_count[i].textContent = arr[i] + '%';
-		progress_bar[i].style.height = arr[i] + '%';
-
-		let max_i = arr.indexOf(Math.max.apply(Math,arr));
-		document.getElementsByClassName('main-cards-item')[max_i].classList.add("main-cards-item-active");
-		
-
-
-    };
-    
-    
-
-	votingBtn.setAttribute('disabled', 'true');
-
-
-});
-
-
-	/*
-votingBtn.addEventListener('click', function() {
-
-let g = function(f, c) {
-          let arr = []; 
-            for (i = 0; i < f - 1; i++) {
-                let b;
-                c ? (b = c, b = Math.floor(Math.random() * (b + 1))) : b = 0;
-                c -= b;
-                arr[i] = b
-            }
-            arr.push(c);
-            return arr
-        }
-
-           (result_count.length, 100),
-        f = 0;
-    [].forEach.call(result_count, function(result_count, c) {
-        result_count.value = g[c];
-        f += g[c]
-    });
+	let n1 = Math.ceil(Math.random()*99),
+   		n2 = Math.ceil(Math.random()*(100-n1)),
+   		n3 = 100 - n1 - n2,
+   		arr = [n1, n2, n3],
+   		max = arr[0],
+   		id = 0;
+   		
+		result_count[0].textContent = n1 + '%';
+		result_count[1].textContent = n2 + '%';
+		result_count[2].textContent = n3 + '%';
+		progress_bar[0].style.height = n1 + '%';
+		progress_bar[1].style.height = n2 + '%';
+		progress_bar[2].style.height = n3 + '%';
 /*
-    let max_i = arr.indexOf(Math.max.apply(Math, arr));
-		document.getElementsByClassName('main-cards-item')[max_i].classList.add("main-cards-item-active");
-*/
-// });
+		for (i = 0; i < arr.length; ++i) {
+
+		    if (arr[i] > max) {
+		    	max = arr[i];
+		    	id = i;
+		    	main_cards_item[id].classList.add("main-cards-item-active");
+		    	if (i != id){
+		    		for (i = 0; i < arr.length; ++i) {
+		    			main_cards_item[i].classList.remove("main-cards-item-active");
+		    		}
+		    	}
+		    } 
 
 
+		}*/
+});
 
 // Кнопка "Вмешаться в выборы"
 
@@ -216,25 +199,25 @@ function checkSex() {
 	let n = 1;
 	for (let i = 0; i < sex.length; i++) {
 		if (sex[0].checked) {
-			personEasy.style.backgroundImage = "url(../Candidate/img/construct-5.png)";
-        	preview.style.backgroundImage = "url(../Candidate/img/construct-5.png)";
+			personEasy.style.backgroundImage = "url(../img/construct-5.png)";
+        	preview.style.backgroundImage = "url(../img/construct-5.png)";
 		 	maleStyle ();
 		 	sex[i].addEventListener('change', function () {
 			
 				if (sex[0].checked) {
 					n = n + 4;
 					maleStyle ();
-					personEasy.style.backgroundImage = "url(../Candidate/img/construct-"+n+".png)";
-		        	preview.style.backgroundImage = "url(../Candidate/img/construct-"+n+".png)";
+					personEasy.style.backgroundImage = "url(../img/construct-"+n+".png)";
+		        	preview.style.backgroundImage = "url(../img/construct-"+n+".png)";
 		        	document.getElementsByClassName('main-cards-item')[1].querySelector('.sex').textContent = sex[0].value;
-		        	document.getElementsByClassName('main-cards-item')[1].querySelector('.photo-1').style.backgroundImage = "url(../Candidate/img/construct-"+n+".png)";
+		        	document.getElementsByClassName('main-cards-item')[1].querySelector('.photo-1').style.backgroundImage = "url(../img/construct-"+n+".png)";
 				} else {
 					n = 1;
 					femaleStyle ();
-					personEasy.style.backgroundImage = "url(../Candidate/img/construct-"+n+".png)";
-		        	preview.style.backgroundImage = "url(../Candidate/img/construct-"+n+".png)";
+					personEasy.style.backgroundImage = "url(../img/construct-"+n+".png)";
+		        	preview.style.backgroundImage = "url(../img/construct-"+n+".png)";
 		        	document.getElementsByClassName('main-cards-item')[1].querySelector('.sex').textContent = sex[1].value;
-		        	document.getElementsByClassName('main-cards-item')[1].querySelector('.photo-1').style.backgroundImage = "url(../Candidate/img/construct-"+n+".png)";
+		        	document.getElementsByClassName('main-cards-item')[1].querySelector('.photo-1').style.backgroundImage = "url(../img/construct-"+n+".png)";
 				}
 			});	
 		};
@@ -251,17 +234,17 @@ function femaleStyle () {
 	next.addEventListener('click', function() {
 			femaleNum++;
 			if (femaleNum > femaleMaxNum) { femaleNum = 1; }
-			personEasy.style.backgroundImage = "url(../Candidate/img/construct-"+femaleNum+".png)";
-			preview.style.backgroundImage = "url(../Candidate/img/construct-"+femaleNum+".png)";
-			document.getElementsByClassName('main-cards-item')[1].querySelector('.photo-1').style.backgroundImage = "url(../Candidate/img/construct-"+femaleNum+".png)";
+			personEasy.style.backgroundImage = "url(../img/construct-"+femaleNum+".png)";
+			preview.style.backgroundImage = "url(../img/construct-"+femaleNum+".png)";
+			document.getElementsByClassName('main-cards-item')[1].querySelector('.photo-1').style.backgroundImage = "url(../img/construct-"+femaleNum+".png)";
 	});
 
 	prev.addEventListener('click', function() {
 			femaleNum--;
 			if (femaleNum < 1) { femaleNum = femaleMaxNum; }
-			personEasy.style.backgroundImage = "url(../Candidate/img/construct-"+femaleNum+".png)";
-			preview.style.backgroundImage = "url(../Candidate/img/construct-"+femaleNum+".png)";
-			document.getElementsByClassName('main-cards-item')[1].querySelector('.photo-1').style.backgroundImage = "url(../Candidate/img/construct-"+femaleNum+".png)";
+			personEasy.style.backgroundImage = "url(../img/construct-"+femaleNum+".png)";
+			preview.style.backgroundImage = "url(../img/construct-"+femaleNum+".png)";
+			document.getElementsByClassName('main-cards-item')[1].querySelector('.photo-1').style.backgroundImage = "url(../img/construct-"+femaleNum+".png)";
 
 	});	
 };
@@ -274,18 +257,18 @@ function maleStyle () {
 	next.addEventListener('click', function() {
 			maleNum++;
 			if (maleNum > maleMaxNum) { maleNum = 5; }
-			personEasy.style.backgroundImage = "url(../Candidate/img/construct-"+maleNum+".png)";
-			preview.style.backgroundImage = "url(../Candidate/img/construct-"+maleNum+".png)";
-			document.getElementsByClassName('main-cards-item')[1].querySelector('.photo-1').style.backgroundImage = "url(../Candidate/img/construct-"+maleNum+".png)";
+			personEasy.style.backgroundImage = "url(../img/construct-"+maleNum+".png)";
+			preview.style.backgroundImage = "url(../img/construct-"+maleNum+".png)";
+			document.getElementsByClassName('main-cards-item')[1].querySelector('.photo-1').style.backgroundImage = "url(../img/construct-"+maleNum+".png)";
 
 	});
 
 	prev.addEventListener('click', function() {
 			maleNum--;
 			if (maleNum < 5) { maleNum = maleMaxNum; }
-			personEasy.style.backgroundImage = "url(../Candidate/img/construct-"+maleNum+".png)";
-			preview.style.backgroundImage = "url(../Candidate/img/construct-"+maleNum+".png)";
-			document.getElementsByClassName('main-cards-item')[1].querySelector('.photo-1').style.backgroundImage = "url(../Candidate/img/construct-"+maleNum+".png)";
+			personEasy.style.backgroundImage = "url(../img/construct-"+maleNum+".png)";
+			preview.style.backgroundImage = "url(../img/construct-"+maleNum+".png)";
+			document.getElementsByClassName('main-cards-item')[1].querySelector('.photo-1').style.backgroundImage = "url(../img/construct-"+maleNum+".png)";
 
 	});	
 	
@@ -308,13 +291,13 @@ age.onkeypress = function(e) {
     function getChar(event) {
       if (event.which == null) {
         if (event.keyCode < 32) return null;
-        return String.fromCharCode(event.keyCode) // IE
+        return String.fromCharCode(event.keyCode) 
       }
 
       if (event.which != 0 && event.charCode != 0) {
         if (event.which < 32) return null;
-        return String.fromCharCode(event.which) // остальные
+        return String.fromCharCode(event.which)
       }
 
-      return null; // специальная клавиша
+      return null; 
     }
