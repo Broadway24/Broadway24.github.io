@@ -231,8 +231,8 @@ function checkSex() {
 				} else {
 					n = 1;
 					femaleStyle ();
-					personEasy.style.backgroundImage = "url(../img/construct-"+n+".png)";
-		        	preview.style.backgroundImage = "url(../img/construct-"+n+".png)";
+					personEasy.style.backgroundImage = "url(../Candidate/img/construct-"+n+".png)";
+		        	preview.style.backgroundImage = "url(../Candidate/img/construct-"+n+".png)";
 		        	document.getElementsByClassName('main-cards-item')[1].querySelector('.sex').textContent = sex[1].value;
 		        	document.getElementsByClassName('main-cards-item')[1].querySelector('.photo-1').style.backgroundImage = "url(../Candidate/img/construct-"+n+".png)";
 				}
