@@ -173,14 +173,26 @@ resetBtn.addEventListener('click', function() {
 votingBtn.addEventListener('click', function votingFun() {
 
 	let arr1 = random();
-   		
+   	let arr2 = arr1;	
 	for (i = 0; i < arr.length; ++i) {
 	    result_count[i].textContent = arr[i] + '%';
 		progress_bar[i].style.height = arr[i] + '%';			
 	}
-let arr2 = arr1;
-
-
+	
+	if (arr1[0] > arr1[1] && arr1[0] > arr1[2]) {
+		main_cards_item[0].classList.add("main-cards-item-active");
+		main_cards_item[1].classList.remove("main-cards-item-active");
+		main_cards_item[2].classList.remove("main-cards-item-active");
+	} else if (arr1[1] > arr1[0] && arr1[1] > arr1[2]) {
+		main_cards_item[0].classList.remove("main-cards-item-active");
+		main_cards_item[1].classList.add("main-cards-item-active");
+		main_cards_item[2].classList.remove("main-cards-item-active");
+	} else  {
+		main_cards_item[0].classList.remove("main-cards-item-active");
+		main_cards_item[1].classList.remove("main-cards-item-active");
+		main_cards_item[2].classList.add("main-cards-item-active");
+	}
+	
 // Кнопка "Вмешаться в выборы"
 
 crimeBtn.addEventListener('click', function() {
@@ -198,7 +210,22 @@ crimeBtn.addEventListener('click', function() {
 			progress_bar[0].style.height = 0 + '%';
 			result_count[2].textContent = 0 + '%';
 			progress_bar[2].style.height = 0 + '%';
-   		} 
+   		}; 
+	
+	if (arr2[0] > arr2[1] && arr1[0] > arr2[2]) {
+		main_cards_item[0].classList.add("main-cards-item-active");
+		main_cards_item[1].classList.remove("main-cards-item-active");
+		main_cards_item[2].classList.remove("main-cards-item-active");
+	} else if (arr2[1] > arr2[0] && arr1[1] > arr2[2]) {
+		main_cards_item[0].classList.remove("main-cards-item-active");
+		main_cards_item[1].classList.add("main-cards-item-active");
+		main_cards_item[2].classList.remove("main-cards-item-active");
+	} else  {
+		main_cards_item[0].classList.remove("main-cards-item-active");
+		main_cards_item[1].classList.remove("main-cards-item-active");
+		main_cards_item[2].classList.add("main-cards-item-active");
+	};
+	alert('Вы совершили противозаконное действие\nи тем самым попали под СТАТЬЮ 142.1. ФАЛЬСИФИКАЦИЯ ИТОГОВ ГОЛОСОВАНИЯ');
 	arr2 = [0,0,0];
 	crimeBtn.style.display = 'none';
 
