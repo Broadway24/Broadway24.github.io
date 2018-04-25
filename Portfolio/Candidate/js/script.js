@@ -8,12 +8,12 @@ let popupBtn = 		doc.getElementById('popup-btn'),
 	readyBtn = 		doc.getElementById('ready'),
 	resetBtn = 		doc.getElementById('reset'),
 	votingBtn = 	doc.getElementById('voting'),
-	crimeBtn = 		doc.getElementById('crime');
+	crimeBtn = 		doc.getElementById('crime'),
+	mainBtn = 		doc.getElementsByClassName('main-buttons');
 
 let main_cards = 	doc.getElementsByClassName('main-cards'),
 	main_cards_item = doc.getElementsByClassName('main-cards-item'),
 	card_1 = 		doc.getElementsByClassName('main-cards-item')[0],
-	// card_3 = 	doc.getElementsByClassName('main-cards').lastChild,
 	result_count = 	doc.getElementsByClassName('result-count'),
 	progress_bar = 	doc.getElementsByClassName('progress-bar');
 
@@ -26,14 +26,13 @@ popupBtn.addEventListener('click', function() {
 
 	for (let i = 0; i < customBlocks.length; i++) {
 	    customBlocks[i].style.display = "block";
-	    // document.getElementsByClassName('main-cards-item')[i].classList.remove("main-cards-item-active");
 	}
 
-	let card_2 = card_1.cloneNode(true);
-	card_1.parentNode.insertBefore(card_2, card_1.nextSibling);
+	var card_new = card_1.cloneNode(true);
+	card_1.parentNode.insertBefore(card_new, card_1.nextSibling);
 
-	main_cards_item[1].querySelector('.photo-1').style.backgroundImage = "url(../Candidate/img/construct-5.png)";
-
+	main_cards_item[1].querySelector('.photo-1').style.backgroundImage = "url(../img/construct-5.png)";
+	main_cards_item[1].querySelector('.photo-1').style.backgroundSize = 'contain';
 	reset();
 });
 
@@ -63,64 +62,75 @@ let views1 = document.createElement('option');
 
 checkSex();  // выбор внешнего вида и пола
 
+name.addEventListener('change', function() {
+	let nameValue = name.value;
+	let card_new = document.getElementsByClassName('main-cards-item')[1];
+	if (nameValue.length < 40 && nameValue != '' && /^[а-яА-ЯёЁ. ]+$/.test(nameValue) == true) {
+		card_new.querySelector('.name').textContent = name.value;
+		} else {
+			alert('Некорректное значение имени\n\nВедите ФИО по кирилицей');
+					name.value = '';
+		}
+});
+
+age.addEventListener('change', function() {
+	let ageValue = age.value;
+	let card_new = document.getElementsByClassName('main-cards-item')[1];
+	if (ageValue >= 18 && ageValue != '') {
+		if (ageValue % 10 == 1) {
+			card_new.querySelector('.age').textContent = age.value + ' год';
+		}  else if (ageValue % 10 > 1 && ageValue % 10 < 5) {
+			card_new.querySelector('.age').textContent = age.value + ' года';
+		} else {
+			card_new.querySelector('.age').textContent = age.value + ' лет';
+		}	
+	} else {
+		alert('Возраст должен быть боль 18 лет');
+		age.value = '';
+	}
+});
+
+bio.addEventListener('change', function() {
+	let bioValue = bio.value;
+	let card_new = document.getElementsByClassName('main-cards-item')[1];
+	if ((typeof(bioValue)) === 'string'  && bioValue.length < 100 && bioValue != '') {
+		card_new.querySelector('.bio').textContent = bio.value;
+	} else {
+		alert('Заполните биографию');
+	}
+});
+
+views.addEventListener('change', function() {
+	let viewsValue = views.value;
+	let card_new = document.getElementsByClassName('main-cards-item')[1];
+	if  (views.selectedIndex == 0) {
+		alert('Выберите политические взгляды');
+		} else {
+			card_new.querySelector('.views').textContent = views.value;
+		}
+});
+
 readyBtn.addEventListener('click', function() {
 
+	let card_new = doc.getElementsByClassName('main-cards-item')[1];
 	let nameValue = name.value,
 		ageValue = age.value,
+		viewsValue = views.value,
 		bioValue = bio.value;
 
-	if (
-		(typeof(nameValue)) === 'string' && nameValue.length < 40 && nameValue != '' && /^[а-яА-ЯёЁ. ]+$/.test(nameValue) == true
-		&& 	!isNaN(parseFloat(ageValue)) && ageValue >= 18
-		&&  (typeof(bioValue)) === 'string'  && bioValue.length < 100 && bioValue != ''
-		// && 	views.value != ''
-		// 
-		) {
+	crimeBtn.style.display = 'block';
+	
+	if (nameValue == '' || nameValue == '' || bioValue == '') { 
+		alert('Заполните поля формы');
+	} else if (views.selectedIndex == 0) {
+		alert('Выберите политические взгляды');
+	}	else {
 			overlay.style.display = "none";
 			main.style.display = "none";
 			custom.style.display = "none";
 			main.style.display = "block";
-				
-			let card_new = doc.getElementsByClassName('main-cards-item')[1];
-			document.getElementsByClassName('main-cards-item')[1].querySelector('.photo-1').style.backgroundSize = 'contain';
-
-			if (views.selectedIndex == 0) {
-				card_new.querySelector('.views').textContent = views[1].value;
-			} else {
-				card_new.querySelector('.views').textContent = views.value;
-			}
-
-			
-
-			card_new.querySelector('.name').textContent = name.value;
-			
-			if (ageValue % 10 == 1) {
-				card_new.querySelector('.age').textContent = age.value + ' год';
-			}  else if (ageValue % 10 > 1 && ageValue % 10 < 5) {
-				card_new.querySelector('.age').textContent = age.value + ' года';
-			} else {
-				card_new.querySelector('.age').textContent = age.value + ' лет';
-			}
-			
-			card_new.querySelector('.bio').textContent = bio.value;
-
 			reset();
-
-	} else if (nameValue.length > 40 || nameValue == '' || /^[а-яА-ЯёЁ. ]+$/.test(name) == false) {
-			alert('Некорректное значение имени\n\nВедите ФИО по кирилицей');
-			name.value = '';
-
-	} else if (isNaN(parseFloat(ageValue)) || !isFinite(ageValue) || ageValue < 18) {
-		alert('Возраст должен быть боль 18 лет');
-		age.value = '';
-
-	} else if ((typeof(bioValue)) !== 'string' || bioValue.length > 100 || bioValue == '') {
-		alert('Заполниет биографию');
-
-	} else if  (views.selectedIndex = 0) {
-		alert('Выберите политические взгляды');
 		}
-
 });
 
 
@@ -137,8 +147,9 @@ function reset(){
 	bio.value = '';
 	views.value = '';
 	sex[0].checked = true;
-	personEasy.style.backgroundImage = "url(../Candidate/img/construct-5.png)";
-    preview.style.backgroundImage = "url(../Candidate/img/construct-5.png)";
+	personEasy.style.backgroundImage = "url(../img/construct-5.png)";
+    preview.style.backgroundImage = "url(../img/construct-5.png)";
+    
 };
 
 // Кнопка "Сбросить результаты"
@@ -159,86 +170,73 @@ resetBtn.addEventListener('click', function() {
 
 // Кнопка "Провести честное голосование"
 		
-votingBtn.addEventListener('click', function() {
+votingBtn.addEventListener('click', function votingFun() {
 
-	let n1 = Math.ceil(Math.random()*99),
-   		n2 = Math.ceil(Math.random()*(100-n1)),
-   		n3 = 100 - n1 - n2,
-   		arr = [n1, n2, n3],
-   		max = arr[0],
-   		id = 0;
+	let arr1 = random();
    		
-		for (i = 0; i < arr.length; ++i) {
-		    result_count[i].textContent = arr[i] + '%';
-			progress_bar[i].style.height = arr[i] + '%';			
-		}
-/*
-		
-		    if (arr[i] > max) {
-		    	max = arr[i];
-		    	id = i;
-		    	main_cards_item[id].classList.add("main-cards-item-active");
-		    	if (i != id){
-		    		for (i = 0; i < arr.length; ++i) {
-		    			main_cards_item[i].classList.remove("main-cards-item-active");
-		    		}
-		    	}
-		    } 
+	for (i = 0; i < arr.length; ++i) {
+	    result_count[i].textContent = arr[i] + '%';
+		progress_bar[i].style.height = arr[i] + '%';			
+	}
+let arr2 = arr1;
 
-
-		}*/
-});
 
 // Кнопка "Вмешаться в выборы"
 
 crimeBtn.addEventListener('click', function() {
+	
+	arr2[1] += 25;
+	for (i = 0; i < arr2.length; ++i) {
+	    result_count[i].textContent = arr2[i] + '%';
+		progress_bar[i].style.height = arr2[i] + '%';			
+	}
+	
+		if (arr2[1] >= 100 ) {
+   			result_count[1].textContent = 100 + '%';
+			progress_bar[1].style.height = 100 + '%';
+			result_count[0].textContent = 0 + '%';
+			progress_bar[0].style.height = 0 + '%';
+			result_count[2].textContent = 0 + '%';
+			progress_bar[2].style.height = 0 + '%';
+   		} 
+	arr2 = [0,0,0];
+	crimeBtn.style.display = 'none';
 
-	let n1 = Math.ceil(Math.random()*99) - 12,
-   		n2 = Math.ceil(Math.random()*(100-n1)) + 25,
-   		n3 = 100 - n1 - n2 - 13,
-   		arr = [n1, n2, n3],
-   		max = arr[0],
-   		id = 0;
-/*
-   		 if (arr[0] < 0) {
-   		 	arr[2] += Math.abs(arr[0]);
+});
 
-   		 } else if (arr[2] < 0) {
-   		 	arr[0] += Math.abs(arr[2]);
-   		 }
-   		*/
-   		for (i = 0; i < arr.length; ++i) {
-		    result_count[i].textContent = arr[i] + '%';
-			progress_bar[i].style.height = arr[i] + '%';			
-		}
+});
 
-	});
-
-
+function random() {
+  let n1 = Math.ceil(Math.random()*99),
+      n2 = Math.ceil(Math.random()*(100-n1)),
+      n3 = 100 - n1 - n2;
+      arr = [n1, n2, n3];
+      return arr
+};
 
 function checkSex() {
 	let n = 1;
 	for (let i = 0; i < sex.length; i++) {
 		if (sex[0].checked) {
-			personEasy.style.backgroundImage = "url(../Candidate/img/construct-5.png)";
-        	preview.style.backgroundImage = "url(../Candidate/img/construct-5.png)";
+			personEasy.style.backgroundImage = "url(../img/construct-5.png)";
+        	preview.style.backgroundImage = "url(../img/construct-5.png)";
 		 	maleStyle ();
 		 	sex[i].addEventListener('change', function () {
 			
 				if (sex[0].checked) {
 					n = n + 4;
 					maleStyle ();
-					personEasy.style.backgroundImage = "url(../Candidate/img/construct-"+n+".png)";
-		        	preview.style.backgroundImage = "url(../Candidate/img/construct-"+n+".png)";
+					personEasy.style.backgroundImage = "url(../img/construct-"+n+".png)";
+		        	preview.style.backgroundImage = "url(../img/construct-"+n+".png)";
 		        	document.getElementsByClassName('main-cards-item')[1].querySelector('.sex').textContent = sex[0].value;
-		        	document.getElementsByClassName('main-cards-item')[1].querySelector('.photo-1').style.backgroundImage = "url(../Candidate/img/construct-"+n+".png)";
+		        	document.getElementsByClassName('main-cards-item')[1].querySelector('.photo-1').style.backgroundImage = "url(../img/construct-"+n+".png)";
 				} else {
 					n = 1;
 					femaleStyle ();
-					personEasy.style.backgroundImage = "url(../Candidate/img/construct-"+n+".png)";
-		        	preview.style.backgroundImage = "url(../Candidate/img/construct-"+n+".png)";
+					personEasy.style.backgroundImage = "url(../img/construct-"+n+".png)";
+		        	preview.style.backgroundImage = "url(../img/construct-"+n+".png)";
 		        	document.getElementsByClassName('main-cards-item')[1].querySelector('.sex').textContent = sex[1].value;
-		        	document.getElementsByClassName('main-cards-item')[1].querySelector('.photo-1').style.backgroundImage = "url(../Candidate/img/construct-"+n+".png)";
+		        	document.getElementsByClassName('main-cards-item')[1].querySelector('.photo-1').style.backgroundImage = "url(../img/construct-"+n+".png)";
 				}
 			});	
 		};
@@ -255,17 +253,17 @@ function femaleStyle () {
 	next.addEventListener('click', function() {
 			femaleNum++;
 			if (femaleNum > femaleMaxNum) { femaleNum = 1; }
-			personEasy.style.backgroundImage = "url(../Candidate/img/construct-"+femaleNum+".png)";
-			preview.style.backgroundImage = "url(../Candidate/img/construct-"+femaleNum+".png)";
-			document.getElementsByClassName('main-cards-item')[1].querySelector('.photo-1').style.backgroundImage = "url(../Candidate/img/construct-"+femaleNum+".png)";
+			personEasy.style.backgroundImage = "url(../img/construct-"+femaleNum+".png)";
+			preview.style.backgroundImage = "url(../img/construct-"+femaleNum+".png)";
+			document.getElementsByClassName('main-cards-item')[1].querySelector('.photo-1').style.backgroundImage = "url(../img/construct-"+femaleNum+".png)";
 	});
 
 	prev.addEventListener('click', function() {
 			femaleNum--;
 			if (femaleNum < 1) { femaleNum = femaleMaxNum; }
-			personEasy.style.backgroundImage = "url(../Candidate/img/construct-"+femaleNum+".png)";
-			preview.style.backgroundImage = "url(../Candidate/img/construct-"+femaleNum+".png)";
-			document.getElementsByClassName('main-cards-item')[1].querySelector('.photo-1').style.backgroundImage = "url(../Candidate/img/construct-"+femaleNum+".png)";
+			personEasy.style.backgroundImage = "url(../img/construct-"+femaleNum+".png)";
+			preview.style.backgroundImage = "url(../img/construct-"+femaleNum+".png)";
+			document.getElementsByClassName('main-cards-item')[1].querySelector('.photo-1').style.backgroundImage = "url(../img/construct-"+femaleNum+".png)";
 
 	});	
 };
@@ -278,18 +276,18 @@ function maleStyle () {
 	next.addEventListener('click', function() {
 			maleNum++;
 			if (maleNum > maleMaxNum) { maleNum = 5; }
-			personEasy.style.backgroundImage = "url(../Candidate/img/construct-"+maleNum+".png)";
-			preview.style.backgroundImage = "url(../Candidate/img/construct-"+maleNum+".png)";
-			document.getElementsByClassName('main-cards-item')[1].querySelector('.photo-1').style.backgroundImage = "url(../Candidate/img/construct-"+maleNum+".png)";
+			personEasy.style.backgroundImage = "url(../img/construct-"+maleNum+".png)";
+			preview.style.backgroundImage = "url(../img/construct-"+maleNum+".png)";
+			document.getElementsByClassName('main-cards-item')[1].querySelector('.photo-1').style.backgroundImage = "url(../img/construct-"+maleNum+".png)";
 
 	});
 
 	prev.addEventListener('click', function() {
 			maleNum--;
 			if (maleNum < 5) { maleNum = maleMaxNum; }
-			personEasy.style.backgroundImage = "url(../Candidate/img/construct-"+maleNum+".png)";
-			preview.style.backgroundImage = "url(../Candidate/img/construct-"+maleNum+".png)";
-			document.getElementsByClassName('main-cards-item')[1].querySelector('.photo-1').style.backgroundImage = "url(../Candidate/img/construct-"+maleNum+".png)";
+			personEasy.style.backgroundImage = "url(../img/construct-"+maleNum+".png)";
+			preview.style.backgroundImage = "url(../img/construct-"+maleNum+".png)";
+			document.getElementsByClassName('main-cards-item')[1].querySelector('.photo-1').style.backgroundImage = "url(../img/construct-"+maleNum+".png)";
 
 	});	
 	
@@ -309,16 +307,16 @@ age.onkeypress = function(e) {
   }
 }
 
-    function getChar(event) {
-      if (event.which == null) {
-        if (event.keyCode < 32) return null;
-        return String.fromCharCode(event.keyCode) 
-      }
+function getChar(event) {
+  if (event.which == null) {
+    if (event.keyCode < 32) return null;
+    return String.fromCharCode(event.keyCode) 
+  }
 
-      if (event.which != 0 && event.charCode != 0) {
-        if (event.which < 32) return null;
-        return String.fromCharCode(event.which)
-      }
+  if (event.which != 0 && event.charCode != 0) {
+    if (event.which < 32) return null;
+    return String.fromCharCode(event.which)
+  }
 
-      return null; 
-    }
+  return null; 
+}
