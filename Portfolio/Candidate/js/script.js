@@ -85,7 +85,7 @@ age.addEventListener('change', function() {
 			card_new.querySelector('.age').textContent = age.value + ' лет';
 		}	
 	} else {
-		alert('Возраст должен быть боль 18 лет');
+		alert('Возраст должен быть больше 18 лет');
 		age.value = '';
 	}
 });
